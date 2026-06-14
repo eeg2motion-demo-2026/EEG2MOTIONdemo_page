@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="title" content="EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals">
+  <meta name="description" content="EMMM is a generative framework that unites an EEG encoder with a motion decoder to synthesize continuous, full-body human motions directly from non-invasive brain activity.">
+  <meta name="keywords" content="Brain-Computer Interface, BCI, Generative Brain Decoding, Human Motion Synthesis">
+  <meta name="author" content="Anonymous">
+  
+  <title>EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals</title>
+  
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title" style="font-weight: 800;">EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- <span class="author-block"><a href="YOUR_LINK">Anonymous</a><sup>1</sup>,</span> -->
+              <!-- <span class="author-block"><a href="YOUR_LAB_LINK">Co-Author Name</a><sup>1</sup></span> -->
+            </div>
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Institution/University Name</span>
+            </div> -->
+
+            <!-- <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/YOUR_PAPER.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/YOUR_USERNAME/EMMM" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code & Dataset</span>
+                  </a>
+                </span>
+              </div>
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body has-text-centered">
+        <img src="static/images/demopage.png" alt="EEG-conditioned Masked Motion Model Architecture Overview" style="width: 100%; max-width: 950px; border-radius: 8px;">
+        <h2 class="subtitle has-text-justified mt-4" style="font-size: 1.1rem;">
+          <strong>A simplified schematic of our framework.</strong> The proposed architecture consists of a neural EEG encoder and a generative motion decoder. Concretely, high-level features extracted by the EEG encoder serve as continuous guidance signals to condition the human motion synthesis process. The downstream motion decoder then predicts the masked motion token sequences, which are subsequently mapped into continuous, full-body kinematics by a pre-trained VQ-VAE decoder.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified" style="font-size: 1.05rem; line-height: 1.6;">
+            <p>
+              Human motion is governed by a hierarchical motor system where the brain provides high-level intentions and lower-level structures coordinate detailed dynamics. Existing brain-computer interfaces (BCIs) typically oversimplify this into constrained classification or low-dimensional control, failing to capture the richness of natural movement. Bridging this gap to achieve open-vocabulary, full-body motion synthesis remains challenging due to the substantial cross-modal divergence between sparse neural signals and high-dimensional kinematics, as well as the lack of large-scale paired EEG-motion datasets. To address this, we introduce EEG2MOTION, the first EEG-motion-text dataset for human motion synthesis, comprising nearly 20,000 paired samples across thousands of motions. Using this dataset, we first demonstrate via multimodal contrastive learning that non-invasive EEG embeddings can be effectively aligned with text, video, and motion representations to decode high-level semantics. We then propose EEG-conditioned Masked Motion Model (EMMM), a generative framework that unites an EEG encoder with a motion decoder to synthesize continuous, full-body human motions directly from brain activity. Experimental results show that EMMM generates coherent and realistic motion sequences from non-invasive brain signals. To the best of our knowledge, this is the first work to generate diverse full-body human motions from non-invasive brain signals, opening a new direction toward generative and open-vocabulary motor BCIs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Experimental Paradigm</h2>
+          <div class="has-text-centered my-4">
+            <img src="static/images/paradigm.png" alt="Experimental Paradigm" style="width: 80%; border-radius: 8px;">
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              Illustration of the EEG2MOTION data collection paradigm. Participants wearing an EEG cap observed human motion videos rendered from HumanML3D motion sequences while EEG signals were continuously recorded. The experiment consisted of three blocks, each containing 125 sessions. The second block was reserved for validation and testing, whereas the remaining blocks were used for training. Each session contained 8 motion clips of one second each. Participants were instructed to maintain visual attention and indicate whether they remained attentive using a button press after each session.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Synthesized Human Motions Showcase</h2>
+      <div class="content has-text-centered mb-5">
+        <p>We visualize 3D full-body motions synthesized by EMMM alongside the Ground Truth. Each block contains the Ground Truth movement (left) and the motion sequence generated by EMMM (right).</p>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;"> "a man lifts his hands up in front his face and turns to his left and then his right and puts his hands back down"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_man_lifts_his_hands_up_in_front_his_face_and_turns_to_his_left_and_then_his_right_and_puts_his_hands_back_down_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_man_lifts_his_hands_up_in_front_his_face_and_turns_to_his_left_and_then_his_right_and_puts_his_hands_back_down_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a man takes a few steps forward stopping in a standing position"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_man_takes_a_few_steps_forward_stopping_in_a_standing_position_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_man_takes_a_few_steps_forward_stopping_in_a_standing_position_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;"> "a person jumps up in the air"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_jumps_up_in_the_air_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_jumps_up_in_the_air_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person raises their left hand to the side of their head"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_raises_their_left_hand_to_the_side_of_their_head_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_raises_their_left_hand_to_the_side_of_their_head_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person slowly walked forward"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_slowly_walked_forward_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_slowly_walked_forward_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person stands still for a moment and then staggers forward"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_stands_still_for_a_moment_and_then_staggers_forward_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_stands_still_for_a_moment_and_then_staggers_forward_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person steps to the left sideways"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_steps_to_the_left_sideways_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_steps_to_the_left_sideways_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person walking and changing their path to the right"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walking_and_changing_their_path_to_the_right_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walking_and_changing_their_path_to_the_right_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person walks slowly with a slight sway in each step"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walks_slowly_with_a_slight_sway_in_each_step_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walks_slowly_with_a_slight_sway_in_each_step_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"a person walks turning to the left"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walks_turning_to_the_left_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/a_person_walks_turning_to_the_left_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"person picks up something on their left side and moves it to their right side"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/person_picks_up_something_on_their_left_side_and_moves_it_to_their_right_side_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/person_picks_up_something_on_their_left_side_and_moves_it_to_their_right_side_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"person walks forwards casually then stopst"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/person_walks_forwards_casually_then_stops_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/person_walks_forwards_casually_then_stops_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"stick figure walks forward in a straight line"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/stick_figure_walks_forward_in_a_straight_line_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/stick_figure_walks_forward_in_a_straight_line_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"the person is walking around the bend to the left"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_is_walking_around_the_bend_to_the_left_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_is_walking_around_the_bend_to_the_left_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"the person is walking towards the right"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_is_walking_towards_the_right_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_is_walking_towards_the_right_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"the person moves backwards as if pushed by someone in front of them"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_moves_backwards_as_if_pushed_by_someone_in_front_of_them_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_moves_backwards_as_if_pushed_by_someone_in_front_of_them_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-4">
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"the person was walking towards the right"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_was_walking_towards_the_right_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_person_was_walking_towards_the_right_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="box" style="height: 100%;">
+            <h3 class="subtitle is-6 has-text-centered mb-2" style="font-weight: 600;">"the sim appears to scoot across the plane"</h3>
+            <div class="columns is-mobile is-variable is-1">
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-dark mb-1" style="font-size: 0.75rem;">GT</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_sim_appears_to_scoot_across_the_plane_TruePose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+              <div class="column is-6 has-text-centered">
+                <span class="tag is-primary mb-1" style="font-size: 0.75rem;">EMMM</span>
+                <video autoplay controls muted loop playsinline width="100%"><source src="static/videos/the_sim_appears_to_scoot_across_the_plane_PredPose_Select0001-0100.mp4" type="video/mp4"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{yourname2026emmm,
+  title={EMMM: EEG-conditioned Masked Motion Model for Human Motion Synthesis},
+  author={Your Lastname, Your Firstname and Co-authors},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+    </div>
+  </section> -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            </p>
+            <p>
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
