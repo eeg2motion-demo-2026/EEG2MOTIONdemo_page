@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="title" content="EEG2MOTION: Synthesizing Diverse Human Motions from EEG Signals during Motion Observation">
-  <meta name="description" content="EMMM is a generative framework that unites an EEG encoder with a motion decoder to synthesize continuous, full-body human motions directly from non-invasive brain activity.">
+  <meta name="title" content="EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals">
+  <meta name="description" content="EEG2MOTION introduces three EEG datasets and a generative framework for open-vocabulary human motion synthesis from non-invasive brain signals.">
   <meta name="keywords" content="Brain-Computer Interface, BCI, Generative Brain Decoding, Human Motion Synthesis">
   <meta name="author" content="Anonymous">
   
-  <title>EEG2MOTION: Synthesizing Diverse Human Motions from EEG Signals during Motion Observation</title>
+  <title>EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals</title>
   
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
@@ -28,7 +28,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title" style="font-weight: 800;">EEG2MOTION: Synthesizing Diverse Human Motions from EEG Signals during Motion Observation</h1>
+            <h1 class="title is-1 publication-title" style="font-weight: 800;">EEG2MOTION: Towards Open-Vocabulary Human Motion Synthesis from Non-invasive Brain Signals</h1>
             <div class="is-size-5 publication-authors">
               <!-- <span class="author-block"><a href="YOUR_LINK">Anonymous</a><sup>1</sup>,</span> -->
               <!-- <span class="author-block"><a href="YOUR_LAB_LINK">Co-Author Name</a><sup>1</sup></span> -->
@@ -78,7 +78,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified" style="font-size: 1.05rem; line-height: 1.6;">
             <p>
-              Human motion is governed by a hierarchical motor system where the brain provides high-level intentions and lower-level structures coordinate detailed dynamics. Existing brain-computer interfaces (BCIs) typically oversimplify this into constrained classification or low-dimensional control, failing to capture the richness of natural movement. Bridging this gap to achieve diverse, full-body motion synthesis remains challenging due to the substantial cross-modal divergence between sparse neural signals and high-dimensional kinematics, as well as the lack of large-scale paired EEG-motion datasets. To address this, we introduce EEG2MOTION, the first EEG-motion-text dataset for human motion synthesis from motion-observation EEG, comprising nearly 20,000 paired samples across thousands of motions. Using this dataset, we first demonstrate via multimodal contrastive learning that non-invasive EEG embeddings can be aligned with text, video, and motion representations to decode high-level semantics. We then propose EEG-conditioned Masked Motion Model (EMMM), a generative framework that unites an EEG encoder with a motion decoder to synthesize continuous, full-body human motions directly from brain activity. Experimental results show that EMMM generates coherent and realistic motion sequences from non-invasive brain signals. To the best of our knowledge, this is the first work to generate diverse full-body human motions from non-invasive brain signals, opening a new direction toward generative and open-vocabulary motor BCIs.
+              Human motion is governed by a hierarchical motor system where the brain provides high-level intentions and lower-level structures coordinate detailed dynamics. Existing brain-computer interfaces (BCIs) typically oversimplify this into constrained classification or low-dimensional control, failing to capture the richness of natural movement. Bridging this gap to achieve diverse, full-body motion synthesis remains challenging due to the substantial cross-modal divergence between sparse neural signals and high-dimensional kinematics, as well as the lack of large-scale paired EEG-motion datasets. To address this, we introduce EEG2MOTION, a dataset suite with three subsets: AO-16, comprising motion-observation recordings from 7 subjects across 16 distinct actions and 20,000 samples, AO-Open, comprising open-vocabulary motion-observation recordings from 9 subjects with 28,000 paired EEG-motion-text samples across thousands of motions, and MI-Open, comprising open-vocabulary motor-imagery recordings from 7 subjects and 5,250 paired samples. This is the first dataset suite designed specifically for open-vocabulary motor BCIs. Using these datasets, we evaluate classification performance on AO-16 and open-vocabulary retrieval performance on AO-Open and MI-Open. We then propose EEG-conditioned Masked Motion Model (EMMM), a generative framework that unites an EEG encoder with a motion decoder to synthesize continuous, full-body human motions directly from brain activity. Experimental results show that EMMM generates coherent and realistic motion sequences from non-invasive brain signals. To the best of our knowledge, this is the first work to generate diverse full-body human motions from non-invasive brain signals, opening a new direction toward generative and open-vocabulary motor BCIs.
             </p>
           </div>
         </div>
@@ -92,11 +92,11 @@
         <div class="column is-full-width">
           <h2 class="title is-3 has-text-centered">Experimental Paradigm</h2>
           <div class="has-text-centered my-4">
-            <img src="static/images/paradigm.png" alt="Experimental Paradigm" style="width: 80%; border-radius: 8px;">
+            <img src="static/images/paradigm_three_paradigms.png" alt="Three EEG2MOTION experimental paradigms" style="width: 80%; border-radius: 8px;">
           </div>
           <div class="content has-text-justified">
             <p>
-              Illustration of the EEG2MOTION data collection paradigm. Participants wearing an EEG cap observed human motion videos rendered from HumanML3D motion sequences while EEG signals were continuously recorded. The experiment consisted of three blocks, each containing 125 sessions. The second block was reserved for validation and testing, whereas the remaining blocks were used for training. Each session contained 8 motion clips of one second each. Participants were instructed to maintain visual attention and indicate whether they remained attentive using a button press after each session.
+              EEG2MOTION includes three data-collection paradigms. In AO-16, 7 participants observed 16 distinct actions, with each 3-second source motion played at 5× speed to produce a 0.6-second sample. In AO-Open, 9 participants observed motions from an open-vocabulary motion space, with each sample lasting 1 second. In MI-Open, 7 participants watched a 2.5-second motion and then imagined performing it for 2.5 seconds after the visual stimulus disappeared. The three datasets contain 20,000, 28,000, and 5,250 samples, respectively.
             </p>
           </div>
         </div>
